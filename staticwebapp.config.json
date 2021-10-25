@@ -1,0 +1,24 @@
+{
+    "routes": [
+    {
+        "route": "/"
+    },
+    {
+        "route": "/task"
+    },
+    {
+        "route": "/goal"
+    },
+    {
+        "route": "/report"
+    },
+    {
+        "route": "/policy"
+    },
+    {
+        "route": "/team"
+    },
+    {
+        "route": "/user"
+    }]
+}
