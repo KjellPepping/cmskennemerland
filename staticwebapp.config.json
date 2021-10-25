@@ -1,24 +1,8 @@
 {
-    "routes": [
-    {
-        "route": "/"
+    "navigationFallback": {
+        "rewrite": "index.html"
     },
-    {
-        "route": "/task"
-    },
-    {
-        "route": "/goal"
-    },
-    {
-        "route": "/report"
-    },
-    {
-        "route": "/policy"
-    },
-    {
-        "route": "/team"
-    },
-    {
-        "route": "/user"
-    }]
+    "mimeTypes": {
+        ".json": "text/json"
+    }
 }
