@@ -11,6 +11,8 @@ import CRUDTeam from './components/CRUDTeam.vue'
 import Vuetify from 'vuetify'
 import vuetify from './plugins/vuetify'
 
+const baseUrl = "https://kennemerlandapi.azurewebsites.net"
+
 
 
 Vue.config.productionTip = false
@@ -34,5 +36,6 @@ const router = new VueRouter({mode:'history',routes});
 new Vue({
   router:router,
   vuetify,
+  baseUrl,
   render: h => h(App)
 }).$mount('#app')

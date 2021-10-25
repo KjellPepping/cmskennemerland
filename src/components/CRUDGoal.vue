@@ -96,6 +96,7 @@ import axios from 'axios'
       dialog1:false,
       dialog: false,
       dialogDelete: false,
+      
       headers:
       [
         {text:"ID",value:"goalId"},
@@ -161,7 +162,7 @@ import axios from 'axios'
       deleteItemConfirm () {
         this.users.splice(this.editedIndex, 1)
 
-        axios.delete('http://localhost:7071/api/goal/'+encodeURIComponent(this.editedItem.userId))
+        axios.delete($baseUrl+'/goal/'+encodeURIComponent(this.editedItem.userId))
         this.closeDelete()
       },
 
@@ -184,7 +185,7 @@ import axios from 'axios'
       save () {
         if (this.editedIndex > -1) {
           Object.assign(this.users[this.editedIndex], this.editedItem)
-          axios.put('http://localhost:7071/api/goal',{ 
+          axios.put($baseUrl+'/goal',{ 
             goalId:this.editedItem.goalId,
             description: this.editedItem.description,
             startDate:this.editedItem.startDate,
@@ -195,7 +196,7 @@ import axios from 'axios'
         } else {
           this.users.push(this.editedItem)
           console.log(this.editedItem)
-          axios.post('http://localhost:7071/api/goal',{ 
+          axios.post($baseUrl+'/goal',{ 
             goalId:this.editedItem.goalId,
             description: this.editedItem.description,
             startDate:this.editedItem.startDate,
@@ -208,17 +209,17 @@ import axios from 'axios'
     },
 
     mounted(){
-      axios.get('http://localhost:7071/api/goal/')
+      axios.get($baseUrl+'/goal')
       .then(response => {this.goals = response.data})
       .catch(function (error) {
         console.log(error);
       })
-      axios.get('http://localhost:7071/api/user/')
+      axios.get($baseUrl+'/user')
       .then(response => {this.users = response.data})
       .catch(function (error) {
         console.log(error);
       })
-      axios.get('http://localhost:7071/api/team/')
+      axios.get($baseUrl+'/team')
       .then(response => {this.teams = response.data})
       .catch(function (error) {
         console.log(error);
