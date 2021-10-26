@@ -11,7 +11,7 @@ import CRUDTeam from './components/CRUDTeam.vue'
 import Vuetify from 'vuetify'
 import vuetify from './plugins/vuetify'
 
-const baseUrl = "https://kennemerlandapi.azurewebsites.net"
+
 
 
 
@@ -31,11 +31,14 @@ const routes = [
   {path:'*',component:Home}
 ];
 
+Vue.prototype.$appUrl = "https://kennemerlandapi.azurewebsites.net/api"
+
 const router = new VueRouter({mode:'history',routes});
 
 new Vue({
   router:router,
   vuetify,
-  baseUrl,
   render: h => h(App)
 }).$mount('#app')
+
+
