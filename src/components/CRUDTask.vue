@@ -165,7 +165,7 @@ import axios from 'axios'
       deleteItemConfirm () {
         this.tasks.splice(this.editedIndex, 1)
 
-        axios.delete('http://localhost:7071/api/task/'+encodeURIComponent(this.editedItem.taskId))
+        axios.delete(this.$appUrl+'/task/'+encodeURIComponent(this.editedItem.taskId))
         this.closeDelete()
       },
 
@@ -188,7 +188,7 @@ import axios from 'axios'
       save () {
         if (this.editedIndex > -1) {
           Object.assign(this.tasks[this.editedIndex], this.editedItem)
-          axios.put('http://localhost:7071/api/task/',{ 
+          axios.put(this.$appUrl+'/task',{ 
             taskId:this.editedItem.taskId,
             startDate: this.editedItem.startDate,
             endDate:this.editedItem.endDate,
@@ -200,7 +200,7 @@ import axios from 'axios'
         } else {
           this.tasks.push(this.editedItem)
           console.log(this.editedItem)
-          axios.post('http://localhost:7071/api/task/',{ 
+          axios.post(this.$appUrl+'/task',{ 
             taskId:5,
             startDate: this.editedItem.startDate,
             endDate:this.editedItem.endDate,
@@ -214,17 +214,17 @@ import axios from 'axios'
     },
 
     mounted(){
-      axios.get('http://localhost:7071/api/task/')
+      axios.get(this.$appUrl+'/task')
       .then(response => {this.tasks = response.data})
       .catch(function (error) {
         console.log(error);
       }),
-      axios.get('http://localhost:7071/api/goal/')
+      axios.get(this.$appUrl+'/goal')
       .then(response => {this.goals = response.data})
       .catch(function (error) {
         console.log(error);
       }),
-      axios.get('http://localhost:7071/api/team/')
+      axios.get(this.$appUrl+'/team')
       .then(response => {this.teams = response.data})
       .catch(function (error) {
         console.log(error);

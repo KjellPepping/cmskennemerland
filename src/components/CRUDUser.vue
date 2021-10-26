@@ -61,6 +61,7 @@
 
 <script>
 import axios from 'axios'
+
   export default {
     data: () => ({
       dialog: false,
@@ -123,7 +124,7 @@ import axios from 'axios'
       deleteItemConfirm () {
         this.users.splice(this.editedIndex, 1)
 
-        axios.delete('http://localhost:7071/api/user/'+encodeURIComponent(this.editedItem.userId))
+        axios.delete(this.$appUrl+'/user/'+encodeURIComponent(this.editedItem.userId))
         this.closeDelete()
       },
 
@@ -144,9 +145,10 @@ import axios from 'axios'
       },
 
       save () {
+        console.log(this.$baseUrl)
         if (this.editedIndex > -1) {
           Object.assign(this.users[this.editedIndex], this.editedItem)
-          axios.put('http://localhost:7071/api/user',{ 
+          axios.put(this.$appUrl+'/user',{ 
             userId:this.editedItem.userId,
             UserType: this.editedItem.userType,
             Name:this.editedItem.name,
@@ -154,9 +156,10 @@ import axios from 'axios'
             Password:this.editedItem.password})
          
         } else {
+          console.log(this.$baseUrl)
           this.users.push(this.editedItem)
           console.log(this.editedItem)
-          axios.post('http://localhost:7071/api/user',{ 
+          axios.post(this.$appUrl+'/user',{ 
             userId:5,
             UserType: this.editedItem.userType,
             Name:this.editedItem.name,
@@ -168,7 +171,7 @@ import axios from 'axios'
     },
 
     mounted(){
-      axios.get('http://localhost:7071/api/user/')
+      axios.get(this.$appUrl+'/user')
       .then(response => {this.users = response.data})
       .catch(function (error) {
         console.log(error);

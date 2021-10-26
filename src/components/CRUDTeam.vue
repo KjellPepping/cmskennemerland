@@ -137,7 +137,7 @@ import axios from 'axios'
 
       deleteItemConfirm () {
         this.users.splice(this.editedIndex, 1)
-        axios.delete('http://localhost:7071/api/team/'+encodeURIComponent(this.editedItem.teamId))
+        axios.delete(this.$appUrl+'/team/'+encodeURIComponent(this.editedItem.teamId))
         this.closeDelete()
       },
 
@@ -160,7 +160,7 @@ import axios from 'axios'
       save () {
         if (this.editedIndex > -1) {
           Object.assign(this.users[this.editedIndex], this.editedItem)
-          axios.put('http://localhost:7071/api/team',{ 
+          axios.put(this.$appUrl+'/team',{ 
             teamId:this.editedItem.teamId,
             name: this.editedItem.name,
             hierarchyLevel:this.editedItem.hierarchyLevel,
@@ -171,7 +171,7 @@ import axios from 'axios'
         } else {
           this.users.push(this.editedItem)
           console.log(this.editedItem)
-          axios.post('http://localhost:7071/api/team',{ 
+          axios.post(this.$appUrl+'/team',{ 
             teamId:this.editedItem.teamId,
             name: this.editedItem.name,
             hierarchyLevel:this.editedItem.hierarchyLevel,
@@ -184,12 +184,12 @@ import axios from 'axios'
     },
 
     mounted(){
-      axios.get('http://localhost:7071/api/team/')
+      axios.get(this.$appUrl+'/team')
       .then(response => {this.teams = response.data})
       .catch(function (error) {
         console.log(error);
       }),
-      axios.get('http://localhost:7071/api/user/')
+      axios.get(this.$appUrl+'/team')
       .then(response => {this.users = response.data})
       .catch(function (error) {
         console.log(error);

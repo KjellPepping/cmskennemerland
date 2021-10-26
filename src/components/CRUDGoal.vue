@@ -162,7 +162,7 @@ import axios from 'axios'
       deleteItemConfirm () {
         this.users.splice(this.editedIndex, 1)
 
-        axios.delete($baseUrl+'/goal/'+encodeURIComponent(this.editedItem.userId))
+        axios.delete(this.$baseUrl+'/goal/'+encodeURIComponent(this.editedItem.userId))
         this.closeDelete()
       },
 
@@ -185,7 +185,7 @@ import axios from 'axios'
       save () {
         if (this.editedIndex > -1) {
           Object.assign(this.users[this.editedIndex], this.editedItem)
-          axios.put($baseUrl+'/goal',{ 
+          axios.put(this.$appUrl+'/goal',{ 
             goalId:this.editedItem.goalId,
             description: this.editedItem.description,
             startDate:this.editedItem.startDate,
@@ -196,7 +196,7 @@ import axios from 'axios'
         } else {
           this.users.push(this.editedItem)
           console.log(this.editedItem)
-          axios.post($baseUrl+'/goal',{ 
+          axios.post(this.$appUrl+'/goal',{ 
             goalId:this.editedItem.goalId,
             description: this.editedItem.description,
             startDate:this.editedItem.startDate,
@@ -209,17 +209,17 @@ import axios from 'axios'
     },
 
     mounted(){
-      axios.get($baseUrl+'/goal')
+      axios.get(this.$appUrl+'/goal')
       .then(response => {this.goals = response.data})
       .catch(function (error) {
         console.log(error);
       })
-      axios.get($baseUrl+'/user')
+      axios.get(this.$appUrl+'/user')
       .then(response => {this.users = response.data})
       .catch(function (error) {
         console.log(error);
       })
-      axios.get($baseUrl+'/team')
+      axios.get(this.$appUrl+'/team')
       .then(response => {this.teams = response.data})
       .catch(function (error) {
         console.log(error);
