@@ -31,7 +31,7 @@ const routes = [
   {path:'*',component:Home}
 ];
 
-Vue.prototype.$appUrl = "https://kennemerlandapi.azurewebsites.net/api"
+Vue.prototype.$appUrl = "http://localhost:7071/api"
 
 const router = new VueRouter({mode:'history',routes});
 
