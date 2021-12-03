@@ -23,11 +23,28 @@
 </template>
 
 <script>
+ import authentication from './auth';
   export default {
+   
     name: 'HelloWorld',
 
     data: () => ({
  
     }),
+
+    methods:
+    {
+      logOut()
+      {
+        authentication.signOut();
+      }
+    },
+
+    computed:
+    {
+      isAuthenticated(){return authentication.isAuthenticated();}
+    }
+
+  
   }
 </script>
