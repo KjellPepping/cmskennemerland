@@ -10,7 +10,7 @@ import CRUDPolicy from './components/CRUDPolicy.vue'
 import CRUDTeam from './components/CRUDTeam.vue'
 import Vuetify from 'vuetify'
 import vuetify from './plugins/vuetify'
-import authentication from './auth/main.js'
+
 
 Vue.config.productionTip = false
 
@@ -18,7 +18,7 @@ Vue.use(VueRouter);
 Vue.use(Vuetify);
 
 const routes = [
-  {path:'/', component: Home,meta:{requiresAuthentication: true}},
+  {path:'/', component: Home},
   {path:'/user',component:CRUDUser},
   {path:'/task',component:CRUDTask},
   {path:'/goal',component:CRUDGoal},
@@ -28,20 +28,18 @@ const routes = [
   {path:'*',component:Home}
 ];
 
-Vue.prototype.$appUrl = "http://localhost:7071/api"
+Vue.prototype.$appUrl = "https://kennemerlandapi.azurewebsites.net/api/"
 
 
 
 const router = new VueRouter({mode:'history',routes});
 
-authentication.initialize().then(_=>
-  {
     new Vue({
       router:router,
       vuetify,
       render: h => h(App)
     }).$mount('#app')
-  })
+  
 
 
 

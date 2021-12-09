@@ -1,50 +1,45 @@
-<template>
-  <v-container fluid>
-    <v-card class="mx-auto" max-width="1000" >
-    <v-list-item three-line>
-      <v-list-item-content>
-        <div class="text-overline">
-          Welcome
-        </div>
-        <v-list-item-title class="text-h5 mb-1">
-          This is the Kennemerland API Content Management System.
-        </v-list-item-title>
-        <v-list-item-subtitle>This is the Kennemerland API Content Management System.</v-list-item-subtitle>
-      </v-list-item-content>
-    </v-list-item>
+//Dit moet eigenlijk de Tables wrapper component worden waarin de Table components worden 
+//ingeladen met de juiste headers en objecten
 
-    <v-card-actions>
-      <v-btn outlined rounded text >
-        Button
-      </v-btn>
-    </v-card-actions>
-  </v-card>
-  </v-container>
+<template>
+<v-container>
+  <TitleHeader headerText='test' infoText="Dit is een test"/>
+  <TableView :dataHeaders="[{text:'Test',value:'Test'},{text:'Value',value:'Value'}]" :dataItems="[{Test:'Test',Value:'Value'}]" tableTitle='Test' />
+  <div @load="getJsonHeaders()"/>
+</v-container>
 </template>
 
 <script>
- import authentication from './auth';
+import TitleHeader from "./Title.vue"
+import TableView from "./Table.vue"
+import axios from 'axios'
+
   export default {
-   
-    name: 'HelloWorld',
 
     data: () => ({
- 
+      dataItems:[],
     }),
 
-    methods:
-    {
-      logOut()
-      {
-        authentication.signOut();
+    name: 'HelloWorld',
+    components:{TitleHeader,TableView},
+    
+
+    mounted(){
+      axios.get(this.$appUrl+'policy')
+      .then(response => {this.dataItems = response.data})
+      .catch(function (error) {
+        console.log(error);
+      })
+    },
+
+    methods:{
+      getJsonHeaders(){
+        this.dataItems.array.forEach(element => {
+          console.log(element);
+        });
       }
     },
 
-    computed:
-    {
-      isAuthenticated(){return authentication.isAuthenticated();}
-    }
-
-  
+   
   }
 </script>
