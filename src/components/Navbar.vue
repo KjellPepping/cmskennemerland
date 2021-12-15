@@ -61,12 +61,12 @@ export default {
       drawer: false,
       group: null,
     }),
-    props:['color','lighter_color'],
+    props:['color','light_color'],
      computed:{
         cssVars(){
             return{
                 '--color': this.color,
-                '--lighter-color': this.lighter_color,
+                '--light-color': this.light_color,
             }
         },
     },
@@ -80,6 +80,6 @@ export default {
 }
 .NavDrawer
 {
-    background-color: var(--lighter-color) !important;
+    background-color: var(--light-color) !important;
 }
 </style>

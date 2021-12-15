@@ -1,5 +1,6 @@
 <template>
-   <div>
+    <v-container  class="Table" >
+    <v-layout row wrap>
       <v-data-table :headers='dataHeaders' :items='dataItems' class='elevation-1'>
         <template v-slot:top>
             <v-toolbar flat>
@@ -16,15 +17,31 @@
             </v-icon>
         </template>
        </v-data-table>
-    </div>
+    
+    </v-layout>
+    </v-container>
 </template>
 
 <script>
 export default {
-    props:['dataHeaders','dataItems','tableTitle']
+    props:['dataHeaders','dataItems','tableTitle','color','light_color'],
+    computed:{
+        cssVars(){
+            return{
+                '--color': this.color,
+                '--light-color': this.light_color,
+            }
+        },
+    },
 }
 </script>
 
 <style>
-
+.Table
+{
+    background-color: cornsilk !important;
+    border-radius: 10px;
+    box-shadow: 5px 5px 0px var(--color), 10px 10px 0px var(--light-color);
+  
+}
 </style>
