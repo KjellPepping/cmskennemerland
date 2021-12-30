@@ -1,7 +1,7 @@
 <template>
    <v-layout row wrap :style="cssVars" class=".Table">
      <v-flex md8>
-       <v-card class='mb-2 Table'>
+       <v-card class='mb-2'>
          <v-card-title class='title'>
            <v-layout row wrap class='mt-2'>
            </v-layout>

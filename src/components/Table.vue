@@ -15,7 +15,8 @@
             </v-icon>
         </template>
        </v-data-table>
-    </div>
+    
+   </div>
 </template>
 
 <script>
