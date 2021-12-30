@@ -1,11 +1,13 @@
 //Dit moet eigenlijk de Tables wrapper component worden waarin de Table components worden 
 //ingeladen met de juiste headers en objecten
 
-<template>
+<template class="template">
   <v-container>
-    <Navbar v-bind:color="color"/>
-    <TitleHeader class="TitleHeader" v-bind:headerText="headerText" v-bind:infoText="infoText" v-bind:color="color"/>
-    <TableView :dataHeaders="[{text:'Test',value:'Test'},{text:'Value',value:'Value'}]" :dataItems="[{Test:'Test',Value:'Value'}]" v-bind:color="color" />
+    <Navbar v-bind:color="color" :light_color="light_color"/>
+    <TitleHeader class="TitleHeader" v-bind:headerText="headerText" v-bind:infoText="infoText" v-bind:color="color" :light_color="light_color"/>
+    <div v-if="headerText != 'Home'">
+      <TableView :dataHeaders="getJsonHeaders" :dataItems="getDataItems" v-bind:color="color" :light_color="light_color" />
+    </div>
   </v-container>
 </template>
 
@@ -16,15 +18,15 @@ import Navbar from "./Navbar.vue"
 import axios from 'axios'
 
 export default {
-
   data: () => ({
     dataItems:[],
+    dataHeaders:[],
   }),
 
-  props:['headerText','infoText','color'],
+  props:['headerText','infoText','color','light_color','bg_color'],
   name: 'Home',
   components:{TitleHeader,Navbar,TableView},
-  
+
   mounted(){
     axios.get(this.$appUrl+'policy')
     .then(response => {this.dataItems = response.data})
@@ -33,49 +35,35 @@ export default {
     })
   },
 
-  computed:{
-    getJsonHeaders(){
-      console.log(this.dataItems.length)
-      this.dataItems.forEach(element => {
-        console.log(element);
-      });
-      return null
+  computed: {
+    getJsonHeaders () {
+      var headerArray = []
+      var sampleItem = this.dataItems[0]
+   
+
+      for(var key in sampleItem){
+        var header = JSON.stringify({text:key,value:key})
+        headerArray[sampleItem.findIndex[sampleItem[key]]] += header
+      }
+
+      console.log(headerArray)
+     
+      return headerArray
     },
-    //  cssVars(){
-    //     return{
-    //         'light_color': this.calculateColor(this.color,200)
-    //     }
-    // },
+
+    getDataItems()
+    {
+      return this.dataItems
+    }
   },
 
-  // methods:{
-  //   calculateColor(col,amt){
-  //       var usePound = false;
 
-  //       if (col[0] == "#") {
-  //           col = col.slice(1);
-  //           usePound = true;
-  //       }
+   
 
-  //       var num = parseInt(col,16);
-
-  //       var r = (num >> 16) + amt;
-
-  //       if (r > 255) r = 255;
-  //       else if  (r < 0) r = 0;
-
-  //       var b = ((num >> 8) & 0x00FF) + amt;
-
-  //       if (b > 255) b = 255;
-  //       else if  (b < 0) b = 0;
-
-  //       var g = (num & 0x0000FF) + amt;
-
-  //       if (g > 255) g = 255;
-  //       else if (g < 0) g = 0;
-
-  //       return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
-  //     }
-  //   },
-  }
+  
+  
+}
 </script>
+<style>
+
+</style>

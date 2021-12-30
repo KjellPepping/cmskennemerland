@@ -11,11 +11,12 @@
 
 <script>
 export default {
-    props:['headerText','infoText','color'],
+    props:['headerText','infoText','color', 'light_color'],
     computed:{
         cssVars(){
             return{
                 '--color': this.color,
+                '--light-color': this.light_color,
             }
         },
     },
@@ -26,7 +27,7 @@ export default {
 .TitleHeader
 {
   border-radius: 10px;
-  box-shadow: 5px 5px 0px var(--color);
+  box-shadow: 5px 5px 0px var(--color), 10px 10px 0px var(--light-color);
   max-width: 100vw;
   background-color: cornsilk;
 }

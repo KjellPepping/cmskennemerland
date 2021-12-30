@@ -1,10 +1,7 @@
 <template>
-   <div class="Table" :style="cssVars">
-      <v-data-table :headers='dataHeaders' :items='dataItems' class='elevation-1'>
+   <v-container class="Table" :style="cssVars">
+      <v-data-table :headers='dataHeaders' :items='dataItems' class='elevation-1 dataTable'>
         <template v-slot:top>
-            <v-toolbar flat>
-                <v-spacer></v-spacer>   
-            </v-toolbar>
         </template>
          <template v-slot:[`item.actions`]="{ item }">
             <v-icon small class="mr-2" @click="editItem(item)">
@@ -16,16 +13,17 @@
         </template>
        </v-data-table>
     
-   </div>
+   </v-container>
 </template>
 
 <script>
 export default {
-    props:['dataHeaders','dataItems','color'],
+    props:['dataHeaders','dataItems','color','light_color'],
     computed:{
     cssVars(){
         return{
             '--color': this.color,
+            '--light-color': this.light_color,
         }
     },
 },
@@ -36,8 +34,10 @@ export default {
 .Table
 {
   border-radius: 10px;
-  box-shadow: 5px 5px 0px var(--color);
+  box-shadow: 5px 5px 0px var(--color), 10px 10px 0px var(--light-color);
   max-width: 100vw;
   background-color: cornsilk;
+  margin-top: 30px;
 }
+
 </style>
