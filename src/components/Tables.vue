@@ -1,5 +1,5 @@
 <template>
-   <v-layout row wrap>
+   <v-layout row wrap :style="cssVars" class=".Table">
      <v-flex md8>
        <v-card class='mb-2 Table'>
          <v-card-title class='title'>
@@ -16,9 +16,17 @@
 <script>
  import dataTable from "./Table.vue"
  export default {
+   props:['color'],
    components: {
      dataTable
-   }
+   },
+   computed:{
+        cssVars(){
+            return{
+                '--color': this.color,
+            }
+        },
+    },
  }
 </script>
 
@@ -27,7 +35,7 @@
 {
     background-color: cornsilk !important;
     border-radius: 10px;
-    box-shadow: 5px 5px 0px var(--color), 10px 10px 0px var(--lighter-color);
+    box-shadow: 5px 5px 0px var(--color);
     max-width: 100vw;
 }
 </style>
